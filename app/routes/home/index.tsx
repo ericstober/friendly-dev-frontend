@@ -17,8 +17,6 @@ export async function loader({ request }: Route.LoaderArgs): Promise<{ projects:
 const HomePage = ({ loaderData }: Route.ComponentProps) => {
   const { projects } = loaderData;
 
-  console.log(projects);
-
   return (
     <>
       <FeaturedProjects projects={projects} count={2} />
