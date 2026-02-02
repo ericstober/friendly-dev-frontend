@@ -9,7 +9,7 @@ const AboutPreview = () => {
         className='w-32 h-32 rounded-full object-cover border-4 border-blue-500 shadow-md'
       />
       <div>
-        <h2 className='text-2xl font-bold text-white mb-2'>👋🏼 About Me</h2>
+        <h2 className='text-2xl font-bold text-white mb-2'>About Me</h2>
         <p className='text-gray-200 mb-4 max-w-4xl'>
           I'm Eric - a self-taught developer and educator passionate about building friendly digital experiences and
           helping others grow into confident modern devs.

@@ -10,7 +10,7 @@ const AboutPage = () => {
         />
 
         <div>
-          <h1 className='text-3xl font-bold text-white mb-2'>Hey, I'm Eric 👋🏼</h1>
+          <h1 className='text-3xl font-bold text-white mb-2'>Hey, I'm Eric</h1>
           <p className='text-gray-300 text-lg'>
             I'm a passionate weeb developer and content creator who loves building friendly digital experiences and
             helping others grow into confident, modern developers.
@@ -22,14 +22,14 @@ const AboutPage = () => {
       <div className='mb-12'>
         <h2 className='text-2xl font-semibold text-white mb-4'>My Mission</h2>
         <p className='text-gray-300 leading-relaxed'>
-          After turning my life around, I made it my mission to share what I've learned with others - not just about
-          code, but about building a life you're proud of. Through tutorials, courses, and real-world projects, I aim to
-          make development accessible, friendly, and something you look forwards to each day.
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum, dolore odit incidunt mollitia tenetur maiores.
+          Illo itaque sapiente recusandae distinctio non necessitatibus mollitia tempore officiis, rem corporis, dolorem
+          minus doloremque!
         </p>
       </div>
 
       {/* Tech Stack */}
-      <h2 className='text-2xl font-semibold text-white mb-4'>🚀 Tech I Use</h2>
+      <h2 className='text-2xl font-semibold text-white mb-4'>Tech I Use</h2>
       <ul className='flex flex-wrap gap-4 text-sm text-gray-300'>
         {[
           "React",
