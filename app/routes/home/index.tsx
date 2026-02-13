@@ -1,5 +1,5 @@
 import type { Route } from "./+types/index";
-import type { Project, PostMeta, StrapiResponse, StrapiProject } from "~/types";
+import type { Project, Post, StrapiResponse, StrapiProject } from "~/types";
 import FeaturedProjects from "~/components/FeaturedProjects";
 import AboutPreview from "~/components/AboutPreview";
 import LatestPosts from "~/components/LatestPosts";
@@ -8,7 +8,7 @@ export function meta({}: Route.MetaArgs) {
   return [{ title: "The Friendly Dev | Welcome" }, { name: "description", content: "Custom website development" }];
 }
 
-export async function loader({ request }: Route.LoaderArgs): Promise<{ projects: Project[]; posts: PostMeta[] }> {
+export async function loader({ request }: Route.LoaderArgs): Promise<{ projects: Project[]; posts: Post[] }> {
   const url = new URL(request.url);
 
   const [projectRes, postRes] = await Promise.all([
