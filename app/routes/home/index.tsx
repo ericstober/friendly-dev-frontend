@@ -30,7 +30,7 @@ export async function loader({ request }: Route.LoaderArgs): Promise<{ projects:
     date: item.date,
     category: item.category,
     featured: item.featured,
-    image: item.image?.url ? `${import.meta.env.VITE_STRAPI_URL}${item.image.url}` : "/images/no-image.png",
+    image: item.image?.url ? `${item.image.url}` : "/images/no-image.png",
   }));
 
   const posts = postJson.data.map((item) => ({
@@ -40,7 +40,7 @@ export async function loader({ request }: Route.LoaderArgs): Promise<{ projects:
     excerpt: item.excerpt,
     body: item.body,
     date: item.date,
-    image: item.image?.url ? `${import.meta.env.VITE_STRAPI_URL}${item.image.url}` : "/images/no-image.png",
+    image: item.image?.url ? `${item.image.url}` : "/images/no-image.png",
   }));
 
   return { projects, posts };
