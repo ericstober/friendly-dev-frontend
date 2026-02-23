@@ -5,14 +5,20 @@ import ProjectCard from "~/components/ProjectCard";
 import Pagination from "~/components/Pagination";
 import { AnimatePresence, motion } from "framer-motion";
 
+// meta function provides SEO metadata for the Projects page
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "The Friendly Dev | Projects" }, { name: "description", content: "My website project portfolio" }];
+  return [
+    { title: "The Friendly Dev | Projects" }, // Page title
+    { name: "description", content: "My website project portfolio" }, // Meta description
+  ];
 }
 
+// loader function fetches all projects from Strapi API
 export async function loader({ request }: Route.LoaderArgs): Promise<{ projects: Project[] }> {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/projects?populate=*`);
   const json: StrapiResponse<StrapiProject> = await res.json();
 
+  // Map Strapi response to frontend-friendly Project objects
   const projects = json.data.map((item) => ({
     id: item.id,
     documentId: item.documentId,
@@ -28,39 +34,43 @@ export async function loader({ request }: Route.LoaderArgs): Promise<{ projects:
   return { projects };
 }
 
+// ProjectsPage component
+// Renders the project portfolio with category filtering, pagination, and animation
 const ProjectsPage = ({ loaderData }: Route.ComponentProps) => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [currentPage, setCurrentPage] = useState(1);
-  const projectsPerPage = 10;
+  const [selectedCategory, setSelectedCategory] = useState("All"); // currently selected category
+  const [currentPage, setCurrentPage] = useState(1); // current pagination page
+  const projectsPerPage = 10; // number of projects per page
 
   const { projects } = loaderData as { projects: Project[] };
 
-  // Get unique categories
+  // Get unique project categories for filter buttons
   const categories = ["All", ...new Set(projects.map((project) => project.category))];
 
-  // Filter projects based on the category
+  // Filter projects based on selected category
   const filteredProjects =
     selectedCategory === "All" ? projects : projects.filter((project) => project.category === selectedCategory);
 
-  // Calculate total pages
+  // Calculate total pages for pagination
   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
 
-  // Get current pages projects
+  // Get projects to display on the current page
   const indexOfLast = currentPage * projectsPerPage;
   const indexOfFirst = indexOfLast - projectsPerPage;
   const currentProjects = filteredProjects.slice(indexOfFirst, indexOfLast);
 
   return (
     <section>
+      {/* Page heading */}
       <h2 className='text-3xl text-white font-bold mb-8'>Projects</h2>
 
+      {/* Category filter buttons */}
       <div className='flex flex-wrap gap-2 mb-8'>
         {categories.map((category) => (
           <button
             key={category}
             onClick={() => {
-              setSelectedCategory(category);
-              setCurrentPage(1);
+              setSelectedCategory(category); // update category filter
+              setCurrentPage(1); // reset to first page
             }}
             className={`px-3 py-1 rounded text-sm cursor-pointer ${selectedCategory === category ? "bg-blue-600 text-white" : "bg-gray-700 text-gray-200"}`}
           >
@@ -69,6 +79,7 @@ const ProjectsPage = ({ loaderData }: Route.ComponentProps) => {
         ))}
       </div>
 
+      {/* Animated grid of project cards */}
       <AnimatePresence mode='wait'>
         <motion.div layout className='grid gap-6 sm:grid-cols-2'>
           {currentProjects.map((project) => (
@@ -79,6 +90,7 @@ const ProjectsPage = ({ loaderData }: Route.ComponentProps) => {
         </motion.div>
       </AnimatePresence>
 
+      {/* Pagination controls */}
       <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={setCurrentPage} />
     </section>
   );
