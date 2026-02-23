@@ -1,11 +1,20 @@
+// Props for PostFilter component
 type PostFilterProps = {
-  searchQuery: string;
-  onSearchChange: (value: string) => void;
+  searchQuery: string; // Current search input value
+  onSearchChange: (value: string) => void; // Callback triggered when input changes
 };
 
+// PostFilter component
+// Provides a controlled input field for filtering blog posts.
+// The parent component manages the search state.
 const PostFilter = ({ searchQuery, onSearchChange }: PostFilterProps) => {
   return (
     <div className='mb-6 '>
+      {/*
+        Controlled input:
+        - value is driven by searchQuery prop
+        - onChange calls parent handler to update state
+      */}
       <input
         type='text'
         value={searchQuery}
